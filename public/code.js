@@ -49,7 +49,7 @@ function findUnicornByName() {
 }
 
 function findUnicornByWeight() {
-  console.log("findByWeight" + "got called!");
+  console.log("findUnicornByWeight" + "got called!");
   console.log($("#lowerWeight").val());
   $.ajax({
     url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByWeight/",
@@ -85,7 +85,7 @@ function findUnicornByFood() {
 }
 
 function setup() {
-  $("#findUnicornByWeight").click(findByWeight);
+  $("#findUnicornByWeight").click(findUnicornByWeight);
   $("#findUnicornByFood").click(findUnicornByFood);
   $("#findUnicornByName").click(findUnicornByName);
   $("#filter").click(filter_f);

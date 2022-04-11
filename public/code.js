@@ -37,7 +37,7 @@ function process_res(data) {
 function findUnicornByName() {
   console.log($("#unicornName").val());
   $.ajax({
-    url: "https://radiant-anchorage-93970.herokuapp.com/findByName/",
+    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByName/",
     type: "POST",
     data: {
       unicornName: $("#unicornName").val(),
@@ -52,7 +52,7 @@ function findByWeight() {
   console.log("findByWeight" + "got called!");
   console.log($("#lowerWeight").val());
   $.ajax({
-    url: "https://radiant-anchorage-93970.herokuapp.com/findByWeight",
+    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByWeight",
     type: "POST",
     data: {
       lowerWeight: $("#lowerWeight").val(),

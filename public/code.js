@@ -53,7 +53,7 @@ function findUnicornByWeight() {
   console.log($("#lowerWeight").val());
   console.log($("#higherWeight").val());
   $.ajax({
-    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByWeight/",
+    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByWeight",
     type: "POST",
     data: {
       lowerWeight: $("#lowerWeight").val(),

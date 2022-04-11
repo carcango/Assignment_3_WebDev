@@ -1,4 +1,33 @@
-received_data = null;
+received_data = [];
+
+function resetPage() {
+  $("#unicornNameFilter").prop("checked", false);
+  $("#unicornWieghtFilter").prop("checked", false);
+}
+
+function filter_f() {
+  name_ = "unchecked";
+  weight_ = "unchecked";
+
+  if ($("#unicornNameFilter").is(":checked")) {
+    name_ = "checked";
+  }
+  if ($("#unicornWeightFilter").is(":checked")) {
+    weight_ = "checked";
+  }
+  // console.log(received_data);
+
+  tmp = received_data.map((ob) => {
+    result = [];
+    if (name_ == "checked") result.push(ob["name"]);
+
+    if (weight_ == "checked") result.push(ob["weight"]);
+
+    return result;
+  });
+  // console.log(tmp);
+  $("#result").html("<pre>" + tmp + "</pre>");
+}
 
 function process_res(data) {
   received_data = data;
@@ -6,17 +35,33 @@ function process_res(data) {
   $("#result").html(JSON.stringify(data));
 }
 function findUnicornByName() {
-  console.log("findUnicornByName()" + "got called!");
   console.log($("#unicornName").val());
-
   $.ajax({
-    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByName",
+    url: "https://radiant-anchorage-93970.herokuapp.com/findByName/",
     type: "POST",
     data: {
       unicornName: $("#unicornName").val(),
     },
     success: process_res,
   });
+  resetPage();
+  $("#filters").show();
+}
+
+function findByWeight() {
+  console.log("findByWeight" + "got called!");
+  console.log($("#lowerWeight").val());
+  $.ajax({
+    url: "https://radiant-anchorage-93970.herokuapp.com/findByWeight",
+    type: "POST",
+    data: {
+      lowerWeight: $("#lowerWeight").val(),
+      higherWeight: $("#higherWeight").val(),
+    },
+    success: process_res,
+  });
+  resetPage();
+  $("#filters").show();
 }
 
 function findUnicornByFood() {
@@ -35,19 +80,16 @@ function findUnicornByFood() {
     },
     success: process_res,
   });
+  resetPage();
+  $("#filters").show();
 }
 
 function setup() {
-  $("#findUnicornByName").click(findUnicornByName);
+  $("#findUnicornByWeight").click(findByWeight);
   $("#findUnicornByFood").click(findUnicornByFood);
+  $("#findUnicornByName").click(findUnicornByName);
+  $("#filter").click(filter_f);
+  $("#filters").hide();
 }
 
-// function filter(){
-//     received_data.map(function (obj_){
-//         aList = []
-//         if( // if the name check box is checked)
-//             aList.push("name")
-//         return aList
-//     })
-// }
 $(document).ready(setup);

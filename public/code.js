@@ -2,7 +2,7 @@ received_data = [];
 
 function resetPage() {
   $("#unicornNameFilter").prop("checked", false);
-  $("#unicornWieghtFilter").prop("checked", false);
+  $("#unicornWeightFilter").prop("checked", false);
 }
 
 function filter_f() {

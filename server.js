@@ -44,27 +44,31 @@ app.post("/findUnicornByName", function (req, res) {
   });
 });
 
+
+
 app.post("/findUnicornByWeight", function (req, res) {
   console.log("req. has been received");
   console.log(req.body.unicornWeight);
   lower = "lowerWeight";
   upper = "higherWeight";
-  unicornModel.find(
-    {
-      $and: [
-        { weight: { $gte: req.body.lower } },
-        { weight: { $lt: req.body.upper } },
-      ],
-    },
-    function (err, unicorns) {
-      if (err) {
-        console.log("Error " + err);
-      } else {
-        console.log("Data " + unicorns);
-      }
-      res.send(unicorns);
+  unicornModel.find({
+    $and: [
+      { weight: { $gte: req.body.lowerWeight } },
+      { weight: { $lt: req.body.upperWeight } },
+    ],
+    
+  },
+  function (err, unicorns) {
+    if (err) {
+      console.log("Error " + err);
+    } else {
+      console.log("Data " + unicorns);
     }
+    res.send(unicorns);
+  }
+  
   );
+  
 });
 
 app.post("/findUnicornByFood", function (req, res) {

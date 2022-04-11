@@ -14,8 +14,7 @@ app.use(
 
 const mongoose = require("mongoose");
 
-// mongoose.connect("mongodb+srv://nabil828:comp1537@cluster0.lbm8g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-//     { useNewUrlParser: true, useUnifiedTopology: true });
+app.use(express.static("./public"));
 
 mongoose.connect(
   "mongodb+srv://carcango97:comp1537@cluster0.tcuqv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
@@ -45,7 +44,7 @@ app.post("/findUnicornByName", function (req, res) {
   });
 });
 
-app.use(express.static("./public"));
+
 
 app.post("/findByWeight", function (req, res) {
   console.log("req. has been received");

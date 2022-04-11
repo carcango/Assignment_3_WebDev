@@ -46,7 +46,7 @@ app.post("/findUnicornByName", function (req, res) {
 
 
 
-app.post("/findByWeight", function (req, res) {
+app.post("/findUnicornByWeight", function (req, res) {
   console.log("req. has been received");
   console.log(req.body.unicornWeight);
   lower = "lowerWeight";

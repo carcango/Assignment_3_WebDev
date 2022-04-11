@@ -48,7 +48,7 @@ function findUnicornByName() {
   $("#filters").show();
 }
 
-function findByWeight() {
+function findUnicornByWeight() {
   console.log("findByWeight" + "got called!");
   console.log($("#lowerWeight").val());
   $.ajax({

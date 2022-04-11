@@ -10,7 +10,7 @@ function findUnicornByName() {
   console.log($("#unicornName").val());
 
   $.ajax({
-    url: "https://evening-plateau-06617.herokuapp.com/findUnicornByName",
+    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByName",
     type: "POST",
     data: {
       unicornName: $("#unicornName").val(),
@@ -27,7 +27,7 @@ function findUnicornByFood() {
   if ($("#apple").is(":checked")) appleIsChecked = "checked";
 
   $.ajax({
-    url: "https://evening-plateau-06617.herokuapp.com/findUnicornByFood",
+    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByFood",
     type: "POST",
     data: {
       appleIsChecked: appleIsChecked,

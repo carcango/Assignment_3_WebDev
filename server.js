@@ -48,12 +48,11 @@ app.post("/findUnicornByName", function (req, res) {
 
 app.post("/findUnicornByWeight", function (req, res) {
   console.log("req. has been received");
-  lower = "lowerWeight";
-  upper = "higherWeight";
+
   unicornModel.find({
     $and: [
-      { weight: { $gte: req.body.lower } },
-      { weight: { $lt: req.body.higher } },
+      { weight: { $gte: req.body.lowerWeight } },
+      { weight: { $lt: req.body.higherWeight } },
     ],
     
   },

@@ -47,6 +47,20 @@ app.post("/findUnicornByName", function (req, res) {
 
 app.use(express.static("./public"));
 
+app.post("/findByWeight", function (req, res) {
+  console.log("req. has been received");
+  console.log(req.body.unicornWeight);
+  lower = "lowerWeight";
+  upper = "higherWeight";
+  unicornModel.find({
+    $and: [
+      { weight: { $gte: req.body.lower } },
+      { weight: { $lt: req.body.upper } },
+    ],
+  });
+  res.send(unicorns);
+});
+
 app.post("/findUnicornByFood", function (req, res) {
   console.log("req. has been recieved");
   console.log(req.body.appleIsChecked);

@@ -37,6 +37,7 @@ function process_res(data) {
 function findUnicornByName() {
   console.log($("#unicornName").val());
   $.ajax({
+    // url: "http://localhost:5000/findUnicornByName"
     url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByName/",
     type: "POST",
     data: {
@@ -53,6 +54,7 @@ function findUnicornByWeight() {
   console.log($("#lowerWeight").val());
   console.log($("#higherWeight").val());
   $.ajax({
+    // url: "http://localhost:5000/findUnicornByName"
     url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByWeight",
     type: "POST",
     data: {
@@ -73,6 +75,7 @@ function findUnicornByFood() {
   if ($("#apple").is(":checked")) appleIsChecked = "checked";
 
   $.ajax({
+    // url: "http://localhost:5000/findUnicornByName"
     url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByFood",
     type: "POST",
     data: {

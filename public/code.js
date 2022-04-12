@@ -15,7 +15,7 @@ function filter_f() {
   if ($("#unicornWeightFilter").is(":checked")) {
     weight_ = "checked";
   }
-  // console.log(received_data);
+  console.log(received_data);
 
   tmp = received_data.map((ob) => {
     result = [];
@@ -25,7 +25,7 @@ function filter_f() {
 
     return result;
   });
-  // console.log(tmp);
+  console.log(tmp);
   $("#result").html("<pre>" + tmp + "</pre>");
 }
 

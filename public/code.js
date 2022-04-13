@@ -54,8 +54,8 @@ function process_res(data) {
 function findUnicornByFood() {
 
   $.ajax({
-    url: "http://localhost:5000/findUnicornByFood",
-    // url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByFood",
+    // url: "http://localhost:5000/findUnicornByFood",
+    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByFood",
     type: "POST",
     data: {
 
@@ -70,7 +70,8 @@ function findUnicornByName() {
   w = $(this).attr("id");
   
 
-  url = "http://localhost:5000/findUnicornByName";
+  // url = "http://localhost:5000/findUnicornByName";
+  url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByName",
   unicornName = w
   data = unicornName
   $.get(

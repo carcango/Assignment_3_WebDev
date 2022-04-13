@@ -71,7 +71,7 @@ function findUnicornByName() {
   
 
   // url = "http://localhost:5000/findUnicornByName";
-  url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByName",
+  url = "https://radiant-anchorage-93970.herokuapp.com/findUnicornByName",
   unicornName = w
   data = unicornName
   $.get(

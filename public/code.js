@@ -1,3 +1,5 @@
+
+
 received_data = [];
 
 function resetPage() {
@@ -32,55 +34,31 @@ function filter_f() {
 function process_res(data) {
   received_data = data;
   console.log(data);
-  $("#result").html(JSON.stringify(data));
-}
-function findUnicornByName() {
-  console.log($("#unicornName").val());
-  $.ajax({
-    // url: "http://localhost:5000/findUnicornByName"
-    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByName/",
-    type: "POST",
-    data: {
-      unicornName: $("#unicornName").val(),
-    },
-    success: process_res,
-  });
-  resetPage();
-  $("#filters").show();
+
+  result = "";
+
+  for (i = 0; i < data.length; i++) {
+    // for each unicorn
+    result += `<button id="${data[i]['name']}" class="unicornButtons">`;
+    result += data[i]['name'];
+    result += "</button>";
+    result += "<br>"
+
+
+  }
+  $("#result").html(result);
 }
 
-function findUnicornByWeight() {
-  console.log("findUnicornByWeight" + "got called!");
-  console.log($("#lowerWeight").val());
-  console.log($("#higherWeight").val());
-  $.ajax({
-    // url: "http://localhost:5000/findUnicornByName"
-    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByWeight",
-    type: "POST",
-    data: {
-      lowerWeight: $("#lowerWeight").val(),
-      higherWeight: $("#higherWeight").val(),
-    },
-    success: process_res,
-  });
-  resetPage();
-  $("#filters").show();
-}
+
 
 function findUnicornByFood() {
-  carrotIsChecked = "unchecked";
-  appleIsChecked = "unchecked";
-  if ($("#carrot").is(":checked")) carrotIsChecked = "checked";
-
-  if ($("#apple").is(":checked")) appleIsChecked = "checked";
 
   $.ajax({
-    // url: "http://localhost:5000/findUnicornByName"
-    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByFood",
+    url: "http://localhost:5000/findUnicornByFood",
+    // url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByFood",
     type: "POST",
     data: {
-      appleIsChecked: appleIsChecked,
-      carrotIsChecked: carrotIsChecked,
+
     },
     success: process_res,
   });
@@ -88,12 +66,43 @@ function findUnicornByFood() {
   $("#filters").show();
 }
 
+function findUnicornByName() {
+  w = $(this).attr("id");
+  
+
+  url = "http://localhost:5000/findUnicornByName";
+  unicornName = w
+  data = unicornName
+  $.get(
+    url,
+    function (data) {
+      success: process_res_right(data);
+    }
+    );
+  resetPage();
+  $("#filters").show();
+}
+
+
+
+function process_res_right(data) {
+  received_data = data;
+  console.log(data);
+
+
+  
+
+
+  $("#right").html(data)
+}
+
+
 function setup() {
-  $("#findUnicornByWeight").click(findUnicornByWeight);
-  $("#findUnicornByFood").click(findUnicornByFood);
-  $("#findUnicornByName").click(findUnicornByName);
+  $("#allUnicorns").click(findUnicornByFood);
   $("#filter").click(filter_f);
   $("#filters").hide();
+  
+  $("body").on("click", ".unicornButtons", findUnicornByName);
 }
 
 $(document).ready(setup);

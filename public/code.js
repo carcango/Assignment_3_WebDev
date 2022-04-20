@@ -1,5 +1,3 @@
-
-
 received_data = [];
 
 function resetPage() {
@@ -38,27 +36,66 @@ function process_res(data) {
   result = "";
 
   for (i = 0; i < data.length; i++) {
-    // for each unicorn
-    result += `<button id="${data[i]['name']}" class="unicornButtons">`;
-    result += data[i]['name'];
-    result += "</button>";
-    result += "<br>"
+    result += "<table>";
+    result += "<tr>";
 
+    for (field in data[i]) {
+      result += "<th>";
+      result += field;
+      result += "</th>";
+    }
+    result += "</tr>";
+    result += "<tr>";
+    for (field in data[i]) {
+      result += "<td>";
+      if (field == "loves") {
+        result += "<ul>";
+        for (j = 0; j < data[i]["loves"].length; j++) {
+          result += "<li>";
+          result += data[i][field][j];
+          result += "</li>";
+        }
+        result += "</ul>";
+      } else {
+        result += data[i][field];
+      }
+      result += "</td>";
+    }
 
+    result += "<tr>";
+    result += "</table>";
   }
+
   $("#result").html(result);
 }
+function findUnicornByName() {
+  console.log($("#unicornName").val());
+  url = "http://localhost:5000/findUnicornByName";
+  unicornName = $("#unicornName").val();
+  data = unicornName;
+  $.get(
+    url,
+    function (data) {
+      success: process_res;
+    }
 
+    // url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByName/",
+  );
+  resetPage();
+  $("#filters").show();
+}
 
-
-function findUnicornByFood() {
-
+function findUnicornByWeight() {
+  console.log("findUnicornByWeight" + "got called!");
+  console.log($("#lowerWeight").val());
+  console.log($("#higherWeight").val());
   $.ajax({
-    // url: "http://localhost:5000/findUnicornByFood",
-    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByFood",
+    // url: "http://localhost:5000/findUnicornByWeight",
+    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByWeight",
     type: "POST",
     data: {
-
+      lowerWeight: $("#lowerWeight").val(),
+      higherWeight: $("#higherWeight").val(),
     },
     success: process_res,
   });
@@ -66,44 +103,33 @@ function findUnicornByFood() {
   $("#filters").show();
 }
 
-function findUnicornByName() {
-  w = $(this).attr("id");
-  
+function findUnicornByFood() {
+  carrotIsChecked = "unchecked";
+  appleIsChecked = "unchecked";
+  if ($("#carrot").is(":checked")) carrotIsChecked = "checked";
 
-  // url = "http://localhost:5000/findUnicornByName";
-  url = "https://radiant-anchorage-93970.herokuapp.com/findUnicornByName",
-  unicornName = w
-  data = unicornName
-  $.get(
-    url,
-    function (data) {
-      success: process_res_right(data);
-    }
-    );
+  if ($("#apple").is(":checked")) appleIsChecked = "checked";
+
+  $.ajax({
+    // url: "http://localhost:5000/findUnicornByFood",
+    url: "https://radiant-anchorage-93970.herokuapp.com/findUnicornByFood",
+    type: "POST",
+    data: {
+      appleIsChecked: appleIsChecked,
+      carrotIsChecked: carrotIsChecked,
+    },
+    success: process_res,
+  });
   resetPage();
   $("#filters").show();
 }
 
-
-
-function process_res_right(data) {
-  received_data = data;
-  console.log(data);
-
-
-  
-
-
-  $("#right").html(data)
-}
-
-
 function setup() {
-  $("#allUnicorns").click(findUnicornByFood);
+  $("#findUnicornByWeight").click(findUnicornByWeight);
+  $("#findUnicornByFood").click(findUnicornByFood);
+  $("#findUnicornByName").click(findUnicornByName);
   $("#filter").click(filter_f);
   $("#filters").hide();
-  
-  $("body").on("click", ".unicornButtons", findUnicornByName);
 }
 
 $(document).ready(setup);

@@ -9,7 +9,7 @@ const bodyparser = require("body-parser");
 app.use(
   bodyparser.urlencoded({
     extended: true,
-  }) 
+  })
 );
 
 const mongoose = require("mongoose");
@@ -71,10 +71,19 @@ app.post("/findUnicornByWeight", function (req, res) {
 
 app.post("/findUnicornByFood", function (req, res) {
   console.log("req. has been recieved");
+  console.log(req.body.appleIsChecked);
+  console.log(req.body.carrotIsChecked);
+  aList = [];
+  if (req.body.appleIsChecked == "checked") aList.push("apple");
 
-
+  if (req.body.carrotIsChecked == "checked") aList.push("carrot");
 
   unicornModel.find(
+    {
+      loves: {
+        $all: aList,
+      },
+    },
     function (err, unicorns) {
       if (err) {
         console.log("Error " + err);
